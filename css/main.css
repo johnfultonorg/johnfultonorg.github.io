@@ -189,6 +189,15 @@ img{
   background-color: #555;
 }
 
+.tab-nav .active-tab {
+    border-bottom: 2px solid #555; /* A thicker line to indicate selection */
+}
+
+.tab-nav .active-tab a {
+    color: #000; /* Darker text color */
+    font-weight: bold; /* Bolder text to draw attention */
+    background-color: #f0f0f0; /* A light gray background color */
+}
 
 
 @media screen and (max-width: 880px) {

@@ -161,6 +161,36 @@ img{
   width: 20%;
 }
 
+/* Style for the navigation list */
+.tab-nav {
+  list-style-type: none; /* Removes the bullet points */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333; /* A dark background for the navigation bar */
+}
+
+/* Style for each list item (the individual tabs) */
+.tab-nav li {
+  float: left; /* Aligns the tabs horizontally */
+}
+
+/* Style for the links inside the list items */
+.tab-nav li a {
+  display: block; /* Makes the entire area of the list item clickable */
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none; /* Removes the underline from the links */
+}
+
+/* Change the background color of the tabs when hovering */
+.tab-nav li a:hover {
+  background-color: #555;
+}
+
+
+
 @media screen and (max-width: 880px) {
   /* Text Elements */
 

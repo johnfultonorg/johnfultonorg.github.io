@@ -1,0 +1,80 @@
+<!--
+    File: courses.html
+    This is the courses page, refactored to use the reusable navigation.
+    The JavaScript call at the bottom now specifies 'courses' as the active page.
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="generator" content="Responsive Site Designer 1.5.1419">
+  <title>John Fulton</title>
+  <link rel="stylesheet" href="css/coffeegrinder.css">
+  <link rel="stylesheet" href="css/wireframe-theme.css">
+  <script>document.createElement("picture");</script>
+  <script src="js/picturefill.min.js" class="picturefill" async="async"></script>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <div class="row full-width-row header">
+    <header class="coffee-span-12">
+      <div class="container header-container">
+        <a href="index.html">
+          <h1 class="page-heading">John Fulton</h1>
+        </a>
+        <p class="paragraph tagline">Lecturer and Student Coordinator, Computing Sciences, Franklin University<br>
+        </p>
+        <!-- This is the placeholder for our reusable navigation -->
+        <div id="nav-placeholder"></div>
+      </div>
+    </header>
+  </div>
+  <main class="row">
+    <article class="coffee-span-8 coffee-880-span-8 coffee-549-span-12 coffee-700-span-12">
+
+
+      <br>
+      <h3 class="heading-1"> CBUS Networking Events</h3>
+      <p class="paragraph"><a href="https://cbus-networking-events.org"
+          target="_blank">https://cbus-networking-events.org</a></p>
+      <p>Networking events for in-person and remote technicla working. Focused on Columbus, OH, but with links and tips
+        for other locations as well. </p>
+      <br>
+
+    </article>
+  </main>
+
+  <script>
+    // This function fetches the navigation and sets the active class
+    async function loadNavigation(activePage) {
+      try {
+        // Fetch the HTML content from the nav.html file
+        const response = await fetch('nav.html');
+        const html = await response.text();
+
+        // Insert the fetched HTML into the placeholder div
+        document.getElementById('nav-placeholder').innerHTML = html;
+
+        // Find the correct list item and add the active class
+        const activeTab = document.getElementById(`nav-${activePage}`);
+        if (activeTab) {
+          activeTab.classList.add('active-tab');
+        }
+      } catch (error) {
+        console.error('Error loading navigation:', error);
+      }
+    }
+
+    // Call the function on page load, passing the name of the active page
+    document.addEventListener('DOMContentLoaded', () => {
+      loadNavigation('other');
+    });
+  </script>
+</body>
+
+</html>

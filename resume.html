@@ -1,3 +1,8 @@
+<!--
+    File: resume.html
+    This is the resume page, refactored to use the reusable navigation.
+    The JavaScript call at the bottom now specifies 'resume' as the active page.
+-->
 <!DOCTYPE html>
 <html>
 
@@ -24,13 +29,8 @@
         </a>
         <p class="paragraph tagline">Lecturer and Student Coordinator, Computing Sciences, Franklin University<br>
         </p>
-        <nav>
-          <ul class="tab-nav">
-            <li><a href="index.html">Home</a></li>
-            <li class="active-tab"><a href="resume.html">Resume</a></li>
-            <li><a href="courses.html">Courses Taught</a></li>
-          </ul>
-        </nav>
+        <!-- This is the placeholder for our reusable navigation -->
+        <div id="nav-placeholder"></div>
       </div>
     </header>
   </div>
@@ -39,12 +39,8 @@
 
       <p class="paragraph">
 
-        49 N. Merkle Rd.<br>
-        Bexley, OH 43209<br>
-        (614) 565-8382<br>
         <a href="mailto:john@TechElevator.com">john.fulton2@franklin.edu</a><br>
-        john.fulton@OrdinarySkill.org<br>
-        john@johnfulton.org<br>
+
 
       <h2 class="heading-1">Employment History:</h2><br>
 
@@ -71,7 +67,7 @@
       </ul>
 
       <br>
-      <h3 class="heading-1"> Lead Programmer/Analyst 2000 – 2016</h3>
+      <h3 class="heading-1"> Senior Programmer/Analyst 2000 – 2016</h3>
       Grange Insurance Companies<br>
       Columbus, OH
       <ul>
@@ -226,7 +222,6 @@
       <br>
       <h2 class="heading-1"> Other:</h2>
       <ul>
-
         <li>Expert Fact Witness – Joao et al v. Sleepy Hollow Bank, Southern District of New York, Case No.
           3:03-cv-10199
           (2006 – 2010) Provided expert report on obviousness and trial testimony for defendant regarding prior art.
@@ -237,6 +232,35 @@
         <li>Expert Fact Witness - Joao Bock Transaction Systems, LLC v. Charles Schwab & Co., Inc., Northern District of
           California, Case No. 5:13-cv-000693 (2013–2014). Provided expert report on claim construction for defendant.
         </li>
-        <li>Expert Fact Witness – Joao Bock Transaction Systems, LLC v. Jack Henry & Associates, Inc., District of
-          Delaware,
-          Case No.
+      </ul>
+    </article>
+  </main>
+
+  <script>
+    // This function fetches the navigation and sets the active class
+    async function loadNavigation(activePage) {
+        try {
+            // Fetch the HTML content from the nav.html file
+            const response = await fetch('nav.html');
+            const html = await response.text();
+            
+            // Insert the fetched HTML into the placeholder div
+            document.getElementById('nav-placeholder').innerHTML = html;
+
+            // Find the correct list item and add the active class
+            const activeTab = document.getElementById(`nav-${activePage}`);
+            if (activeTab) {
+                activeTab.classList.add('active-tab');
+            }
+        } catch (error) {
+            console.error('Error loading navigation:', error);
+        }
+    }
+
+    // Call the function on page load, passing the name of the active page
+    document.addEventListener('DOMContentLoaded', () => {
+        loadNavigation('resume');
+    });
+  </script>
+</body>
+</html>

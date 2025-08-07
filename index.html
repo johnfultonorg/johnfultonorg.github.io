@@ -1,3 +1,8 @@
+<!--
+    File: index.html
+    This is the main home page.
+    It now includes a placeholder for the navigation and the script to load it.
+-->
 <!DOCTYPE html>
 <html>
 
@@ -22,13 +27,8 @@
         <h1 class="page-heading">John Fulton</h1>
         <p class="paragraph tagline">Lecturer and Student Coordinator, Computing Sciences, Franklin University<br>
         </p>
-        <nav>
-          <ul class="tab-nav">
-            <li class="active-tab"><a href="index.html">Home</a></li>
-            <li><a href="resume.html" >Resume</a></li>
-            <li><a href="courses.html">Courses Taught</a></li>
-          </ul>
-        </nav>
+        <!-- This is the placeholder for our reusable navigation -->
+        <div id="nav-placeholder"></div>
       </div>
     </header>
   </div>
@@ -37,17 +37,15 @@
       <p class="paragraph">John has spent over 35 years as a professional developer, programming on a wide variety of
         systems from large
         mainframe computers to desktop computers and web-based systems. His most recent experience was 17 years at
-        Grange Insurance as a
-        Lead Programmer Analyst where he designed and developed a variety of .Net-based systems that interact with the
-        company's agents and
-        policyholders. In addition to a Bachelor's and Master’s degree in computer science, John has a masters degree in
-        Cybersecurity. He
-        taught Computer Science for over 10 years as an adjunct faculty member at Franklin University. In 2016, he spent
-        a month teaching
-        computer algorithms as a visiting scholar at a college in Muscat, Oman.</p>
-      <p class="paragraph">After 7 years as an instruction in  coding bootcamp, in May of 2024, John joined Franklin University as a fullt-time faculty member, teaching in
-        Computing Sciences
-        and Mathematics,</p>
+        Grange Insurance as a Senior Programmer Analyst where he designed and developed a variety of .Net-based systems
+        that interact with the
+        company's agents and policyholders. In addition to a Bachelor's and Master’s degree in computer science, John
+        has a masters degree in
+        Cybersecurity. He taught Computer Science for over 10 years as an adjunct faculty member at Franklin University.
+        In 2016, he spent
+        a month teaching computer algorithms as a visiting scholar at a college in Muscat, Oman.</p>
+      <p class="paragraph">After 7 years as an instruction in coding bootcamp, in May of 2024, John joined Franklin
+        University as a fullt-time faculty member, teaching in Computing Sciences and Mathematics,</p>
 
       <p class="paragraph">John is the first-named inventor of two patents for a user interface for banking, bill
         paying, and shopping. He
@@ -61,7 +59,8 @@
 
       <p class="paragraph">John has always been the “go to” guy when others needed an explanation for technical topics.
         In addition to his
-        time teaching beginner programming students at Franklin University and at a coding bootcamp,  John has acted an a mentor and resource for
+        time teaching beginner programming students at Franklin University and at a coding bootcamp, John has acted an a
+        mentor and resource for
         many programmers and
         people who wanted to become programmers. A committed tinker, his workbench is packed with the small robots that
         he builds and programs
@@ -75,6 +74,32 @@
     <div class="coffee-span-12">
     </div>
   </div>
-</body>
 
+  <script>
+    // This function fetches the navigation and sets the active class
+    async function loadNavigation(activePage) {
+        try {
+            // Fetch the HTML content from the nav.html file
+            const response = await fetch('nav.html');
+            const html = await response.text();
+            
+            // Insert the fetched HTML into the placeholder div
+            document.getElementById('nav-placeholder').innerHTML = html;
+
+            // Find the correct list item and add the active class
+            const activeTab = document.getElementById(`nav-${activePage}`);
+            if (activeTab) {
+                activeTab.classList.add('active-tab');
+            }
+        } catch (error) {
+            console.error('Error loading navigation:', error);
+        }
+    }
+
+    // Call the function on page load, passing the name of the active page
+    document.addEventListener('DOMContentLoaded', () => {
+        loadNavigation('home');
+    });
+  </script>
+</body>
 </html>

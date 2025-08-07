@@ -49,7 +49,8 @@
       Columbus, OH
 
       <ul>
-        <li>Preparing and delivering lectures, labs, and other instructional activities for both on-campus and online courses.</li>
+        <li>Preparing and delivering lectures, labs, and other instructional activities for both on-campus and online
+          courses.</li>
         <li>Evaluation of student assignemtns and providing feedback</li>
         <li>Acting as a point of contact and a resource for students</li>
       </ul>
@@ -197,14 +198,20 @@
       <h2 class="heading-1"> Publications and Patents:</h2>
       <ul>
 
-        <li>Communications network interface for user friendly interactive access to online services. U.S. Patent
-          number
-          6,182,052 granted January 30, 2001. Based on work done in 1994 for Huntington Banks with co-inventors Marianne
+        <li>Communications network interface for user friendly interactive access to online services. <a
+            href="https://patentimages.storage.googleapis.com/35/97/7b/15e68be8b15fd2/US6182052.pdf"
+            target="_blank">U.S. Patent
+            number
+            6,182,052</a> granted January 30, 2001. Based on work done in 1994 for Huntington Banks with co-inventors
+          Marianne
           Shepard and Thomas Shafer.</li>
         <li>A Human Factors Approach to Non-Human Computer Interaction, or Why My Parrot Needs a Keyboard of His Own. A
           student paper presented at the 2003 Midwest Region of the Consortium for Computing Sciences in Colleges. Oct.
           2003. Denison College, Granville, OH.</li>
-        <li>DARPA Grand Challenge – a pioneering event for autonomous robotic ground vehicles. Fulton, J., & Pransky,
+        <li><a
+            href="https://www.emerald.com/ir/article-abstract/31/5/414/182127/DARPA-Grand-Challenge-a-pioneering-event-for"
+            target="_blank">DARPA Grand Challenge – a pioneering event for autonomous robotic ground vehicles.</a>
+          Fulton, J., & Pransky,
           J.
           (2004). Industrial Robot: An International Journal, 31, 414-422. Abstract</li>
         <li>Communications network interface for user friendly interactive access to online services. U.S. Patent
@@ -239,28 +246,29 @@
   <script>
     // This function fetches the navigation and sets the active class
     async function loadNavigation(activePage) {
-        try {
-            // Fetch the HTML content from the nav.html file
-            const response = await fetch('nav.html');
-            const html = await response.text();
-            
-            // Insert the fetched HTML into the placeholder div
-            document.getElementById('nav-placeholder').innerHTML = html;
+      try {
+        // Fetch the HTML content from the nav.html file
+        const response = await fetch('nav.html');
+        const html = await response.text();
 
-            // Find the correct list item and add the active class
-            const activeTab = document.getElementById(`nav-${activePage}`);
-            if (activeTab) {
-                activeTab.classList.add('active-tab');
-            }
-        } catch (error) {
-            console.error('Error loading navigation:', error);
+        // Insert the fetched HTML into the placeholder div
+        document.getElementById('nav-placeholder').innerHTML = html;
+
+        // Find the correct list item and add the active class
+        const activeTab = document.getElementById(`nav-${activePage}`);
+        if (activeTab) {
+          activeTab.classList.add('active-tab');
         }
+      } catch (error) {
+        console.error('Error loading navigation:', error);
+      }
     }
 
     // Call the function on page load, passing the name of the active page
     document.addEventListener('DOMContentLoaded', () => {
-        loadNavigation('resume');
+      loadNavigation('resume');
     });
   </script>
 </body>
+
 </html>

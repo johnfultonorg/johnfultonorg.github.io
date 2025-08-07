@@ -10,6 +10,9 @@ Base github page accessible by http://johnfultonorg.github.io
     - Revised using CoffeeCup
 
 3.0 - 8/6/2025
-    -revised manually for johnfulton.org
+    - revised manually for johnfulton.org
+    -cleanup of all pages
+    - added Cousrse taught
+    - Added other links
   
   

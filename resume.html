@@ -19,6 +19,7 @@
 <body>
   <div class="row full-width-row header">
     <header class="coffee-span-12">
+      <a href="#row" class="skip">Skip to main content</a>
       <div class="container header-container">
         <a href="index.html">
           <h1 class="page-heading">John Fulton</h1>
@@ -34,8 +35,8 @@
 
       <p class="paragraph">
 
-        <h2 class="heading-1">John Fulton</h2>
-        <p><a href="mailto:john.fulton2@franklin.edu">john.fulton2@franklin.edu</a></p><br>
+      <h2 class="heading-1">John Fulton</h2>
+      <p><a href="mailto:john.fulton2@franklin.edu">john.fulton2@franklin.edu</a></p><br>
 
 
       <h2 class="heading-1">Employment History:</h2><br>
@@ -196,7 +197,7 @@
 
         <li>Communications network interface for user friendly interactive access to online services. <a
             href="https://patentimages.storage.googleapis.com/35/97/7b/15e68be8b15fd2/US6182052.pdf"
-            target="_blank">U.S. Patent
+            target="_blank">View U.S. Patent
             number
             6,182,052</a> granted January 30, 2001. Based on work done in 1994 for Huntington Banks with co-inventors
           Marianne
@@ -215,10 +216,12 @@
             number 7,599,858</a> filed January 12, 2005, granted October 6, 2009. Based on work done in 1994 for
           Huntington
           Banks with co-inventors Marianne Shepard and Thomas Shafer.</li>
-        <li><a href="https://www.proquest.com/openview/2fc9fd94215e0174621967b602a0fcb5/1" target="_blank">Solid State
-            Disk Forensics: Is there a path forward?</a> A capstone project submitted in partial fulfillment of
+        <li>Solid State
+          Disk Forensics: Is there a path forward? A capstone project submitted in partial fulfillment of
           the
-          requirements for the degree of Master of Science in Cybersecurity. Utica College, Utica, NY. May, 2014.</li>
+          requirements for the degree of Master of Science in Cybersecurity. Utica College, Utica, NY. May, 2014. <a
+            href="https://www.proquest.com/openview/2fc9fd94215e0174621967b602a0fcb5/1" target="_blank">Full text</a>
+        </li>
       </ul>
 
       <br>
@@ -236,14 +239,7 @@
         </li>
       </ul>
     </article>
-    <div class="coffee-span-12">
-      <a href="https://outlook.office.com/bookwithme/user/cc96498ad05a42feaee895a0ba0ddbe7@franklin.edu/meetingtype/LKvY98xRcUOO6FO5XUnP-w2?anonymous&ismsaljsauthenabled&ep=mlink"
-        target="_blank" class="button">Book Time with Me</a>
-    </div>
-    <div class="coffee-span-12">
-      <a href="mailto:john.fulton2@franklin.edu"
-        target="_blank" class="button">Email Me at john.fulton2@franklin.edu</a>
-    </div>
+    <div id="footer-placeholder"></div>
   </main>
 
   <script>
@@ -267,9 +263,26 @@
       }
     }
 
-    // Call the function on page load, passing the name of the active page
+    // This function fetches the navigation and sets the active class
+    async function loadFooter() {
+      try {
+        // Fetch the HTML content from the nav.html file
+        const response = await fetch('footer.html');
+        const html = await response.text();
+
+        // Insert the fetched HTML into the placeholder div
+        document.getElementById('footer-placeholder').innerHTML = html;
+
+      } catch (error) {
+        console.error('Error loading footer:', error);
+      }
+    }
+
+
+    // Call the function on page load, passing the name of the active page for the navigation
     document.addEventListener('DOMContentLoaded', () => {
       loadNavigation('resume');
+      loadFooter();
     });
   </script>
 </body>

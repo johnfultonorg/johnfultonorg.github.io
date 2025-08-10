@@ -19,6 +19,7 @@
 <body>
   <div class="row full-width-row header">
     <header class="coffee-span-12">
+      <a href="#row" class="skip">Skip to main content</a>
       <div class="container header-container">
         <h1 class="page-heading">John Fulton</h1>
         <p class="paragraph tagline">Lecturer and Student Coordinator, Computing Sciences, Franklin University<br>
@@ -64,21 +65,14 @@
     <div class="coffee-span-4 coffee-549-span-12 coffee-700-span-12">
       <img src="John.jpg">
     </div>
-    <div class="coffee-span-12">
-      <a href="https://outlook.office.com/bookwithme/user/cc96498ad05a42feaee895a0ba0ddbe7@franklin.edu/meetingtype/LKvY98xRcUOO6FO5XUnP-w2?anonymous&ismsaljsauthenabled&ep=mlink"
-        target="_blank" class="button">Book Time with Me</a>
-    </div>
-    <div class="coffee-span-12">
-      <a href="mailto:john.fulton2@franklin.edu" target="_blank" class="button">Email Me at
-        john.fulton2@franklin.edu</a>
-    </div>
+    <div id="footer-placeholder"></div>
   </main>
   <div class="row full-width-row footer">
     <div class="coffee-span-12">
     </div>
   </div>
 
-  <script>
+   <script>
     // This function fetches the navigation and sets the active class
     async function loadNavigation(activePage) {
       try {
@@ -99,9 +93,26 @@
       }
     }
 
-    // Call the function on page load, passing the name of the active page
+    // This function fetches the navigation and sets the active class
+    async function loadFooter() {
+      try {
+        // Fetch the HTML content from the nav.html file
+        const response = await fetch('footer.html');
+        const html = await response.text();
+
+        // Insert the fetched HTML into the placeholder div
+        document.getElementById('footer-placeholder').innerHTML = html;
+
+      } catch (error) {
+        console.error('Error loading footer:', error);
+      }
+    }
+
+
+    // Call the function on page load, passing the name of the active page for the navigation
     document.addEventListener('DOMContentLoaded', () => {
       loadNavigation('home');
+      loadFooter();
     });
   </script>
 </body>

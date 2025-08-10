@@ -19,6 +19,7 @@
 <body>
   <div class="row full-width-row header">
     <header class="coffee-span-12">
+      <a href="#row" class="skip">Skip to main content</a>
       <div class="container header-container">
         <a href="index.html">
           <h1 class="page-heading">John Fulton</h1>
@@ -132,40 +133,50 @@
         cutting edge and new as well as those that may not get significant treatment in other courses.</p>
 
     </article>
-    <div class="coffee-span-12">
-      <a href="https://outlook.office.com/bookwithme/user/cc96498ad05a42feaee895a0ba0ddbe7@franklin.edu/meetingtype/LKvY98xRcUOO6FO5XUnP-w2?anonymous&ismsaljsauthenabled&ep=mlink"
-        target="_blank" class="button">Book Time with Me</a>
-    </div>
-    <div class="coffee-span-12">
-      <a href="mailto:john.fulton2@franklin.edu"
-        target="_blank" class="button">Email Me at john.fulton2@franklin.edu</a>
-    </div>
+    <div id="footer-placeholder"></div>
   </main>
   
   <script>
     // This function fetches the navigation and sets the active class
     async function loadNavigation(activePage) {
-        try {
-            // Fetch the HTML content from the nav.html file
-            const response = await fetch('nav.html');
-            const html = await response.text();
-            
-            // Insert the fetched HTML into the placeholder div
-            document.getElementById('nav-placeholder').innerHTML = html;
+      try {
+        // Fetch the HTML content from the nav.html file
+        const response = await fetch('nav.html');
+        const html = await response.text();
 
-            // Find the correct list item and add the active class
-            const activeTab = document.getElementById(`nav-${activePage}`);
-            if (activeTab) {
-                activeTab.classList.add('active-tab');
-            }
-        } catch (error) {
-            console.error('Error loading navigation:', error);
+        // Insert the fetched HTML into the placeholder div
+        document.getElementById('nav-placeholder').innerHTML = html;
+
+        // Find the correct list item and add the active class
+        const activeTab = document.getElementById(`nav-${activePage}`);
+        if (activeTab) {
+          activeTab.classList.add('active-tab');
         }
+      } catch (error) {
+        console.error('Error loading navigation:', error);
+      }
     }
 
-    // Call the function on page load, passing the name of the active page
+    // This function fetches the navigation and sets the active class
+    async function loadFooter() {
+      try {
+        // Fetch the HTML content from the nav.html file
+        const response = await fetch('footer.html');
+        const html = await response.text();
+
+        // Insert the fetched HTML into the placeholder div
+        document.getElementById('footer-placeholder').innerHTML = html;
+
+      } catch (error) {
+        console.error('Error loading footer:', error);
+      }
+    }
+
+
+    // Call the function on page load, passing the name of the active page for the navigation
     document.addEventListener('DOMContentLoaded', () => {
-        loadNavigation('courses');
+      loadNavigation('courses');
+      loadFooter();
     });
   </script>
 </body>

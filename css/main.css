@@ -129,6 +129,7 @@ body > .row.full-width-row.header {
 }
 
 body > .row.footer.full-width-row {
+  margin-top: 1em;
   background-color: #888;
 }
 

@@ -9,7 +9,7 @@ Change version information here and and footer.html
 ## Revision History
 
 3.2 - 9/6/25
-    - Fa25 classes
+    - 25FA classes
     - Display version in index.html
 
 3.1 - 9/3/25

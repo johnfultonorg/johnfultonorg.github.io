@@ -3,12 +3,18 @@ Home
 
 Base github page accessible by http://johnfultonorg.github.io
 
+Change version information here and and footer.html
+
 
 ## Revision History
 
+3.2 - 9/6/25
+    - Fa25 classes
+    - Display version in index.html
+
 3.1 - 9/3/25
     - cleanup
-    - added networking presetationa and linf from "other"
+    - added networking persentation and link from "other"
 
 3.0 - 8/6/2025
     - revised manually for johnfulton.org

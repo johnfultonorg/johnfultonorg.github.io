@@ -2,7 +2,7 @@
 Home
 
 Base github page accessible by http://johnfultonorg.github.io
-Linked to custome domain johnfulton.org
+Linked to custom domain johnfulton.org
 
 Test by opening index.html in Visual Studio nad Live Server
 

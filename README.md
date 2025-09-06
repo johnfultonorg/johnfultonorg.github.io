@@ -2,6 +2,11 @@
 Home
 
 Base github page accessible by http://johnfultonorg.github.io
+Linked to custome domain johnfulton.org
+
+Test by opening index.html in Visual Studio nad Live Server
+
+Deploy by pushing to https://github.com/johnfultonorg/johnfultonorg.github.io.git
 
 Change version information here and and footer.html
 

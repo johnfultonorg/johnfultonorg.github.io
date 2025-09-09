@@ -8,6 +8,9 @@ Change version information here and and footer.html
 
 ## Revision History
 
+3.3 - 9/9/25
+    - revised networking pdf
+
 3.2 - 9/6/25
     - Fa25 classes
     - Display version in index.html

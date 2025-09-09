@@ -2,6 +2,11 @@
 Home
 
 Base github page accessible by http://johnfultonorg.github.io
+Linked to custom domain johnfulton.org
+
+Test by opening index.html in Visual Studio nad Live Server
+
+Deploy by pushing to https://github.com/johnfultonorg/johnfultonorg.github.io.git
 
 Change version information here and and footer.html
 
@@ -12,8 +17,9 @@ Change version information here and and footer.html
     - revised networking pdf
 
 3.2 - 9/6/25
-    - Fa25 classes
+    - 25FA classes
     - Display version in index.html
+    - Added WIX and web design persentation
 
 3.1 - 9/3/25
     - cleanup

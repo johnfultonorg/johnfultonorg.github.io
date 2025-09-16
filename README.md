@@ -13,9 +13,12 @@ Change version information here and and footer.html
 
 ## Revision History
 
+3.4 - 9/16/25
+    - Added link to interview-questions.net
+
 3.3 - 9/9/25
     - revised networking pdf
-    -description and keywords for SEO
+    - description and keywords for SEO
 
 3.2 - 9/6/25
     - 25FA classes

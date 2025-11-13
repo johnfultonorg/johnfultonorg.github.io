@@ -13,6 +13,9 @@ Change version information here and and footer.html
 
 ## Revision History
 
+3.5 - 11/12/25
+    - Copurses for 26SP
+
 3.4 - 9/16/25
     - Added link to interview-questions.net
 

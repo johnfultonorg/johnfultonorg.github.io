@@ -13,6 +13,10 @@ Change version information here and and footer.html
 
 ## Revision History
 
+3.6 - 11/14/25
+    - Fraud and Cybersecurity
+    - Copyright notice
+
 3.5 - 11/12/25
     - Copurses for 26SP
 

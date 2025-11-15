@@ -13,6 +13,9 @@ Change version information here and and footer.html
 
 ## Revision History
 
+3.7 - 11/15/25
+    - merit badges
+    
 3.6 - 11/14/25
     - Fraud and Cybersecurity
     - Copyright notice

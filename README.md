@@ -49,4 +49,5 @@ Change version information here and and footer.html
     - Revised using CoffeeCup
 
 
-  
+  sh check_links.sh
+  sh prod_push.sh

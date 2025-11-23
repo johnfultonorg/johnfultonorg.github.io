@@ -7,21 +7,23 @@ Linked to custom domain johnfulton.org
 Test by opening index.html in Visual Studio nad Live Server
 
 Deploy by pushing to https://github.com/johnfultonorg/johnfultonorg.github.io.git
+sh prod_push.sh
+
 
 Change version information here and and footer.html
 
 
-## Revision History
+## Revision History (most current at top)
 
 3.7 - 11/15/25
-    - merit badges
+    - Merit Badges
     
 3.6 - 11/14/25
     - Fraud and Cybersecurity
     - Copyright notice
 
 3.5 - 11/12/25
-    - Copurses for 26SP
+    - Courses for 26SP
 
 3.4 - 9/16/25
     - Added link to interview-questions.net
@@ -37,7 +39,7 @@ Change version information here and and footer.html
 
 3.1 - 9/3/25
     - cleanup
-    - added networking persentation and link from "other"
+    - added networking preswentation and link from "other"
 
 3.0 - 8/6/2025
     - revised manually for johnfulton.org

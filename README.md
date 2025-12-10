@@ -15,6 +15,9 @@ Change version information here and and footer.html
 
 ## Revision History (most current at top)
 
+3.8 - 12/10/2025
+    - Cleanup
+
 3.7 - 11/15/25
     - Merit Badges
     

@@ -43,7 +43,7 @@ done < <(find . -type f -name "*.html")
 # ----------------------------------------------
 echo ""
 echo "============================"
-echo " Summary of Broken Links"
+echo " Summary of Broken/Questionable Links"
 echo "============================"
 
 if [[ ${#BAD_LINKS[@]} -eq 0 ]]; then

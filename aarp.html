@@ -17,7 +17,7 @@
     <link rel="icon" type="image/x-icon" href="jf.png">
 </head>
 
-<body>
+ <body data-active-page="cyber">
     <div class="row full-width-row header">
         <header class="coffee-span-12">
             <a href="#row" class="skip">Skip to main content</a>
@@ -105,30 +105,7 @@
         <div class="coffee-span-12"></div>
     </div>
 
-    <script>
-        async function loadNavigation(activePage) {
-            try {
-                const response = await fetch('nav.html');
-                const html = await response.text();
-                document.getElementById('nav-placeholder').innerHTML = html;
-                const activeTab = document.getElementById(`nav-cyber`);
-                if (activeTab) activeTab.classList.add('active-tab');
-            } catch (e) { console.error(e); }
-        }
-
-        async function loadFooter() {
-            try {
-                const response = await fetch('footer.html');
-                const html = await response.text();
-                document.getElementById('footer-placeholder').innerHTML = html;
-            } catch (e) { console.error(e); }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadNavigation('cyber');
-            loadFooter();
-        });
-    </script>
+   <script src="js/layout.js"></script>
 
 </body>
 

@@ -27,7 +27,7 @@
     <link rel="icon" type="image/x-icon" href="jf.png" />
   </head>
 
-  <body>
+  <body data-active-page="merit">
     <div class="row full-width-row header">
       <header class="coffee-span-12">
         <a href="#row" class="skip">Skip to main content</a>
@@ -320,47 +320,7 @@
     <div class="row full-width-row footer">
       <div class="coffee-span-12"></div>
     </div>
+    <script src="js/layout.js"></script>
 
-    <script>
-      // This function fetches the navigation and sets the active class
-      async function loadNavigation(activePage) {
-        try {
-          // Fetch the HTML content from the nav.html file
-          const response = await fetch("nav.html");
-          const html = await response.text();
-
-          // Insert the fetched HTML into the placeholder div
-          document.getElementById("nav-placeholder").innerHTML = html;
-
-          // Find the correct list item and add the active class
-          const activeTab = document.getElementById(`nav-${activePage}`);
-          if (activeTab) {
-            activeTab.classList.add("active-tab");
-          }
-        } catch (error) {
-          console.error("Error loading navigation:", error);
-        }
-      }
-
-      // This function fetches the footer
-      async function loadFooter() {
-        try {
-          // Fetch the HTML content from the nav.html file
-          const response = await fetch("footer.html");
-          const html = await response.text();
-
-          // Insert the fetched HTML into the placeholder div
-          document.getElementById("footer-placeholder").innerHTML = html;
-        } catch (error) {
-          console.error("Error loading footer:", error);
-        }
-      }
-
-      // Call the function on page load, passing the name of the active page for the navigation
-      document.addEventListener("DOMContentLoaded", () => {
-        loadNavigation("merit");
-        loadFooter();
-      });
-    </script>
   </body>
 </html>

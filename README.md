@@ -15,6 +15,9 @@ Change version information here and and footer.html
 
 ## Revision History (most current at top)
 
+3.9 - 12/30/25
+    - How Junior Developers Learn to Program
+
 3.8 - 12/10/2025
     - Cleanup
 

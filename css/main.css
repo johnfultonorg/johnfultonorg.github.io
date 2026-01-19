@@ -1,55 +1,119 @@
+/* CSS Custom Properties for Theming */
+:root {
+  /* Light theme (default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-header: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 50%, #2d3d4d 100%);
+  --bg-footer: #888888;
+  --text-primary: #2d2d2d;
+  --text-secondary: #666666;
+  --text-header: #ffffff;
+  --text-accent: #ffb417;
+  --link-color: #1f7bb6;
+  --link-hover: #155a9a;
+  --border-color: #a0a0a0;
+  --button-bg: #007bff;
+  --button-hover: #0056b3;
+  --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] {
+  /* Dark theme */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-header: linear-gradient(135deg, #0d0d0d 0%, #000000 50%, #1a1f2e 100%);
+  --bg-footer: #333333;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-header: #ffffff;
+  --text-accent: #ffb417;
+  --link-color: #4da3d4;
+  --link-hover: #6db8e6;
+  --border-color: #444444;
+  --button-bg: #0d7fdb;
+  --button-hover: #0056b3;
+}
+
+/* Smooth theme transition */
+* {
+  transition: background-color var(--transition-speed) ease, 
+              color var(--transition-speed) ease, 
+              border-color var(--transition-speed) ease;
+}
+
+/* Global */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
 /* Text Elements */
 
 h1.page-heading {
   margin-bottom: 0;
-  color: #fff;
+  color: var(--text-header);
   font-weight: 700;
-  font-size: 32px;
+  font-size: 48px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  animation: fadeInDown 0.8s ease-out;
 }
 
 h2.heading-1 {
-  color: #2d2d2d;
+  color: var(--text-primary);
   font-weight: 700;
   font-size: 20px;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
 }
 
 h3.heading-1 {
-  color: #2d2d2d;
+  color: var(--text-primary);
   font-weight: 700;
   font-size: 16px;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
 }
 
 p.paragraph.tagline {
   margin-top: 0;
-  color: #ffb417;
+  color: var(--text-accent);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 p.paragraph a.inline-link {
-  color: #1f7bb6;
+  color: var(--link-color);
   text-decoration: underline;
 }
 
 p.paragraph {
-  color: #666;
+  color: var(--text-secondary);
   font-style: normal;
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: 1.6;
+  margin-bottom: 1.2em;
 }
 
 p.paragraph.copywright {
   margin-top: 0;
-  color: #fff;
+  color: var(--text-header);
   font-weight: 400;
   font-size: 14px;
 }
 
 p.paragraph span.paragraph-text-1 {
-  color: #1f7bb6;
+  color: var(--link-color);
 }
 
 p.paragraph a.footer-link {
-  color: #ffb417;
+  color: var(--text-accent);
   text-decoration: underline;
 }
 
@@ -69,7 +133,7 @@ p.paragraph span.underline {
 a.link-text.nav-link {
   margin-top: 7px;
   margin-bottom: 7px;
-  color: #1f7bb6;
+  color: var(--link-color);
   line-height: 1.2;
 }
 
@@ -78,7 +142,7 @@ a.link-text.footer-nav {
   margin-bottom: 0;
   padding-right: 14px;
   padding-left: 0;
-  color: #fff;
+  color: var(--text-header);
   text-decoration: underline;
   font-size: 14px;
 }
@@ -124,13 +188,40 @@ body > .row.full-width-row {
 }
 
 body > .row.full-width-row.header {
-  border-bottom: 3px solid #a0a0a0;
-  background-color: #2d2d2d;
+  border-bottom: 3px solid var(--border-color);
+  background: var(--bg-header);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero Section Enhancements */
+body > .row.full-width-row.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(31, 123, 182, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 180, 23, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+header.coffee-span-12 {
+  position: relative;
+  z-index: 2;
+}
+
+.header-container {
+  padding: 40px 20px !important;
+  text-align: center;
 }
 
 body > .row.footer.full-width-row {
   margin-top: 1em;
-  background-color: #888;
+  background-color: var(--bg-footer);
 }
 
 .subgrid > .row > [class*='coffee-span-'] {
@@ -200,24 +291,25 @@ img{
     background-color: #f0f0f0; /* A light gray background color */
 }
 
-/* Add this to your main.css file */
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff; /* Example: A blue background color */
+    background-color: var(--button-bg);
     color: white;
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     margin-top: 20px;
+    border: none;
+    cursor: pointer;
     
     /* Hover effect */
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-speed) ease;
 }
 
 .button:hover {
-    background-color: #0056b3; /* A darker blue on hover */
+    background-color: var(--button-hover);
 }
 
 .skip {
@@ -235,8 +327,152 @@ img{
   height: auto;
 }
 
+/* Dark Mode Toggle Button */
+.theme-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: all var(--transition-speed) ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--button-hover);
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 768px) {
+  .theme-toggle {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0 0 1.5em 0;
+  gap: 5px;
+  font-size: 14px;
+  color: #666;
+}
+
+.breadcrumb li:not(:last-child)::after {
+  content: "»";
+  margin-left: 5px;
+}
+
+.breadcrumb a {
+  color: #1f7bb6;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb li:last-child {
+  color: #2d2d2d;
+  font-weight: 600;
+}
+
+/* Footer Improvements */
+.footer-content {
+  padding: 20px 0;
+}
+
+.footer-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.footer-buttons .button {
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.footer-info {
+  text-align: center;
+  padding: 15px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.footer-version {
+  margin: 0;
+  font-weight: bold;
+  color: #fff;
+}
+
+.footer-copyright {
+  margin: 10px 0;
+  color: #fff;
+  font-size: 12px;
+}
+
+.footer-updated {
+  margin: 5px 0 0 0;
+  color: #fff;
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+/* Hero Section Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media screen and (max-width: 880px) {
   /* Text Elements */
+
+  h1.page-heading {
+    font-size: 36px;
+  }
 
   h2.heading-1 {
     margin-bottom: 0;
@@ -349,7 +585,13 @@ img{
   /* Text Elements */
 
   h1.page-heading {
-    font-size: 20px;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+  }
+
+  p.paragraph.tagline {
+    font-size: 12px;
+    letter-spacing: 0px;
   }
 
   h2.heading-1 {

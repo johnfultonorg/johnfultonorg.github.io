@@ -21,23 +21,11 @@ read -p "Do you want to run check_links.sh before proceeding? (yes/no): " check_
 check_links=$(echo "$check_links" | tr '[:upper:]' '[:lower:]')
 
 if [[ "$check_links" == "yes" || "$check_links" == "y" ]]; then
-    echo "Running link checker..."
-    if [[ -x "./check_links.sh" ]]; then
-        ./check_links.sh
-    else
-        echo "Error: check_links.sh is not executable or not found."
-        exit 1
-    fi
 
-    echo ""
-    # Ask if user wants to continue after link checking
-    read -p "Continue with commit and push? (yes/no): " continue_push
-    continue_push=$(echo "$continue_push" | tr '[:upper:]' '[:lower:]')
+    ./check_links_simple.sh
 
-    if [[ "$continue_push" != "yes" && "$continue_push" != "y" ]]; then
-        echo "Operation canceled by user."
-        exit 0
-    fi
+else    echo "Skipping link check."
+    exit 0
 fi
 
 # -----------------------------------------------

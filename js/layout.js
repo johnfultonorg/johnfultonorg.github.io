@@ -23,6 +23,18 @@ function setCopyrightYear() {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 }
 
+function setLastUpdated() {
+  const lastUpdatedEl = document.getElementById("last-updated");
+  if (lastUpdatedEl) {
+    const today = new Date().toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
+    });
+    lastUpdatedEl.textContent = today;
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const activePage = document.body.dataset.activePage; // e.g., "contact", "courses", ...
 
@@ -30,5 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   setActiveNav(activePage);
 
   await includeHtml("#footer-placeholder", "footer.html");
-  setCopyrightYear(); // covers your index.html year logic too :contentReference[oaicite:4]{index=4}
+  setCopyrightYear();
+  setLastUpdated();
 });

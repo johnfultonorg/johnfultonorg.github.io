@@ -2,6 +2,11 @@
 node_modules
 /dist
 
+# Build artifacts (keep HTML - needed for GitHub Pages)
+.cache
+*.tmp
+*.data
+
 # local env files
 .env.local
 .env.*.local

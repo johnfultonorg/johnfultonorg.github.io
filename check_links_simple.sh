@@ -8,15 +8,16 @@ GREEN="\033[32m"
 RESET="\033[0m"
 
 TEMP_FILE=$(mktemp)
-trap "rm -f $TEMP_FILE" EXIT
-
-declare -A CHECKED=()
+URLS_FILE=$(mktemp)
+trap "rm -f $TEMP_FILE $URLS_FILE ${TEMP_FILE}.data" EXIT
 
 echo "Checking external links..."
 echo ""
 
-# Extract all external URLs from HTML files
-grep -rEho 'https?://[^"<>[:space:]]+' . --include="*.html" 2>/dev/null | while read -r url; do
+# Extract all unique external URLs from HTML files (skip src/ directory to avoid duplicates)
+grep -rEho 'https?://[^"<>[:space:]]+' . --include="*.html" --exclude-dir=src 2>/dev/null | sort -u > "$URLS_FILE"
+
+while IFS= read -r url; do
     [[ -z "$url" ]] && continue
     [[ "$url" =~ johnfulton\.org ]] && continue  # Skip self-references
     
@@ -31,7 +32,7 @@ grep -rEho 'https?://[^"<>[:space:]]+' . --include="*.html" 2>/dev/null | while 
         echo -e "${RED}✗ DEAD${RESET}    - $url ($status)" | tee -a "$TEMP_FILE"
         echo "DEAD|$url|$status" >> "${TEMP_FILE}.data"
     fi
-done
+done < "$URLS_FILE"
 
 # Count results
 ACTIVE_COUNT=$(grep -c "^ACTIVE|" "${TEMP_FILE}.data" 2>/dev/null || echo 0)

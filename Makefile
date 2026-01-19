@@ -1,15 +1,19 @@
-.PHONY: help check-links push clean
+.PHONY: help build check-links push clean
 
 help:
 	@echo "Available commands:"
+	@echo "  make build        - Build site from src/ to root"
 	@echo "  make check-links  - Check all external links"
-	@echo "  make push         - Push changes to git"
+	@echo "  make push         - Build, check links, and push to git"
 	@echo "  make clean        - Clean temp files"
+
+build:
+	@sh build.sh
 
 check-links:
 	@sh check_links_simple.sh
 
-push:
+push: build
 	@sh git_push.sh
 
 clean:

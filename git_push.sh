@@ -15,15 +15,13 @@ if ! git remote get-url github >/dev/null 2>&1; then
 fi
 
 # Ask if user wants to check links first
-read -p "Do you want to run check_links.sh before proceeding? (yes/no): " check_links
+read -p "Do you want to run check_links_simple.sh before proceeding? (yes/no): " check_links
 
 # Normalize input
 check_links=$(echo "$check_links" | tr '[:upper:]' '[:lower:]')
 
 if [[ "$check_links" == "yes" || "$check_links" == "y" ]]; then
-
-    ./check_links_simple.sh
-
+    sh check_links_simple.sh
 else    
     echo "Skipping link check."
 fi

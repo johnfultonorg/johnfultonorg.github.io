@@ -24,8 +24,8 @@ if [[ "$check_links" == "yes" || "$check_links" == "y" ]]; then
 
     ./check_links_simple.sh
 
-else    echo "Skipping link check."
-    exit 0
+else    
+    echo "Skipping link check."
 fi
 
 # -----------------------------------------------

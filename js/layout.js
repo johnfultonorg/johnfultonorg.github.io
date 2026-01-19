@@ -38,10 +38,10 @@ function setLastUpdated() {
 document.addEventListener("DOMContentLoaded", async () => {
   const activePage = document.body.dataset.activePage; // e.g., "contact", "courses", ...
 
-  await includeHtml("#nav-placeholder", "nav.html");
+  await includeHtml("#nav-placeholder", "./nav.html");
   setActiveNav(activePage);
 
-  await includeHtml("#footer-placeholder", "footer.html");
+  await includeHtml("#footer-placeholder", "./footer.html");
   setCopyrightYear();
   setLastUpdated();
 });

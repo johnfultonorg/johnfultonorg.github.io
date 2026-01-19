@@ -7,54 +7,52 @@ RED="\033[31m"
 GREEN="\033[32m"
 RESET="\033[0m"
 
-declare -a DEAD_LINKS=()
-declare -a ACTIVE_LINKS=()
+TEMP_FILE=$(mktemp)
+trap "rm -f $TEMP_FILE" EXIT
+
 declare -A CHECKED=()
 
 echo "Checking external links..."
 echo ""
 
 # Extract all external URLs from HTML files
-while IFS= read -r file; do
-    grep -Eo 'https?://[^"<>[:space:]]+' "$file" 2>/dev/null | while read -r url; do
-        [[ -z "$url" ]] && continue
-        [[ "$url" =~ johnfulton\.org ]] && continue  # Skip self-references
-        
-        # Skip if already checked
-        if [[ -v CHECKED["$url"] ]]; then
-            continue
-        fi
-        CHECKED["$url"]=1
-        
-        # Check the link
-        status=$(curl -o /dev/null -s -w "%{http_code}" --max-time 10 --head "$url" 2>/dev/null || echo "000")
-        
-        # Categorize
-        if [[ "$status" =~ ^(2|3|999|417) ]]; then
-            echo -e "${GREEN}✓ ACTIVE${RESET}  - $url"
-            ACTIVE_LINKS+=("$url")
-        else
-            echo -e "${RED}✗ DEAD${RESET}    - $url ($status)"
-            DEAD_LINKS+=("$url")
-        fi
-    done
-done < <(find . -type f -name "*.html")
+grep -rEho 'https?://[^"<>[:space:]]+' . --include="*.html" 2>/dev/null | while read -r url; do
+    [[ -z "$url" ]] && continue
+    [[ "$url" =~ johnfulton\.org ]] && continue  # Skip self-references
+    
+    # Check the link
+    status=$(curl -o /dev/null -s -w "%{http_code}" --max-time 10 --head "$url" 2>/dev/null || echo "000")
+    
+    # Categorize and write to temp file
+    if [[ "$status" =~ ^(2|3|999|417) ]]; then
+        echo -e "${GREEN}✓ ACTIVE${RESET}  - $url" | tee -a "$TEMP_FILE"
+        echo "ACTIVE|$url" >> "${TEMP_FILE}.data"
+    else
+        echo -e "${RED}✗ DEAD${RESET}    - $url ($status)" | tee -a "$TEMP_FILE"
+        echo "DEAD|$url|$status" >> "${TEMP_FILE}.data"
+    fi
+done
+
+# Count results
+ACTIVE_COUNT=$(grep -c "^ACTIVE|" "${TEMP_FILE}.data" 2>/dev/null || echo 0)
+DEAD_COUNT=$(grep -c "^DEAD|" "${TEMP_FILE}.data" 2>/dev/null || echo 0)
 
 # Summary
 echo ""
 echo "========================================"
 echo "SUMMARY"
 echo "========================================"
-echo -e "${GREEN}Active links: ${#ACTIVE_LINKS[@]}${RESET}"
-echo -e "${RED}Dead links: ${#DEAD_LINKS[@]}${RESET}"
+echo -e "${GREEN}Active links: $ACTIVE_COUNT${RESET}"
+echo -e "${RED}Dead links: $DEAD_COUNT${RESET}"
 
-if [[ ${#DEAD_LINKS[@]} -gt 0 ]]; then
+if [[ $DEAD_COUNT -gt 0 ]]; then
     echo ""
     echo -e "${RED}Dead Links:${RESET}"
-    for link in "${DEAD_LINKS[@]}"; do
-        echo "  ✗ $link"
-    done
+    while IFS='|' read -r status url code; do
+        [[ "$status" == "DEAD" ]] && echo "  ✗ $url (HTTP $code)"
+    done < "${TEMP_FILE}.data"
 fi
 
 echo ""
+rm -f "${TEMP_FILE}.data"
 exit 0

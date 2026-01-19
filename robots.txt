@@ -1,0 +1,7 @@
+# robots.txt for johnfulton.org
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://johnfulton.org/sitemap.xml
+Sitemap: https://johnfultonorg.github.io/sitemap.xml

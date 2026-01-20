@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,6 @@
       name="keywords"
       content="John Fulton, lecturer, Franklin University, computer science, computing sciences, software developer, cybersecurity, programmer, tech professional, patents"
     />
-    <meta name="generator" content="Responsive Site Designer 1.5.1419" />
     <title>John Fulton - Lecturer & Computing Professional | Franklin University</title>
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -62,6 +61,13 @@
   </head>
 
   <body data-active-page="home">
+    <div class="language-selector" aria-label="Language selection">
+      <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Choose language">
+        <option value="en">English</option>
+        <option value="es" disabled>Español (Coming Soon)</option>
+        <option value="fr" disabled>Français (Coming Soon)</option>
+      </select>
+    </div>
     <div class="row full-width-row header">
       <header class="coffee-span-12">
         <a href="#row" class="skip">Skip to main content</a>

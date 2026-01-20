@@ -4,9 +4,25 @@ async function includeHtml(selector, file) {
   if (!host) return;
 
   try {
+    // Add loading state
+    host.classList.add('loading');
+    
     const res = await fetch(file);
     if (!res.ok) throw new Error(`${file} -> ${res.status}`);
-    host.innerHTML = await res.text();
+    const content = await res.text();
+    
+    // Add ARIA labels to nav and footer
+    if (selector === "#nav-placeholder") {
+      host.setAttribute('role', 'navigation');
+      host.setAttribute('aria-label', 'Main navigation');
+    } else if (selector === "#footer-placeholder") {
+      host.setAttribute('role', 'contentinfo');
+      host.setAttribute('aria-label', 'Site footer');
+    }
+    
+    host.innerHTML = content;
+    // Remove loading state
+    host.classList.remove('loading');
   } catch (err) {
     console.error("Include failed:", err);
     // Show user-friendly fallback message
@@ -38,6 +54,17 @@ function setLastUpdated() {
       day: 'numeric' 
     });
     lastUpdatedEl.textContent = today;
+  }
+}
+
+function changeLanguage(lang) {
+  // Store language preference
+  localStorage.setItem('preferredLanguage', lang);
+  
+  // Currently only English is available
+  if (lang !== 'en') {
+    alert('This language is coming soon. Currently only English is available.');
+    document.getElementById('language-select').value = 'en';
   }
 }
 

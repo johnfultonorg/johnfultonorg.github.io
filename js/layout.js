@@ -1,3 +1,9 @@
+function fixNavLinks() {
+  // Navigation links are already correct as-is
+  // Files are at root level, not in subdirectories
+  // No fixing needed
+}
+
 // js/layout.js
 async function includeHtml(selector, file) {
   const host = document.querySelector(selector);
@@ -7,6 +13,7 @@ async function includeHtml(selector, file) {
     const res = await fetch(file);
     if (!res.ok) throw new Error(`${file} -> ${res.status}`);
     host.innerHTML = await res.text();
+    fixNavLinks(); // Fix links after nav is loaded
   } catch (err) {
     console.error("Include failed:", err);
   }
@@ -38,10 +45,14 @@ function setLastUpdated() {
 document.addEventListener("DOMContentLoaded", async () => {
   const activePage = document.body.dataset.activePage; // e.g., "contact", "courses", ...
 
-  await includeHtml("#nav-placeholder", "./nav.html");
+  // Detect if we're on a deep page (src/pages/) or root
+  const isDeepPage = window.location.pathname.includes('src/pages');
+  const basePath = isDeepPage ? '../../' : './';
+
+  await includeHtml("#nav-placeholder", basePath + "nav.html");
   setActiveNav(activePage);
 
-  await includeHtml("#footer-placeholder", "./footer.html");
+  await includeHtml("#footer-placeholder", basePath + "footer.html");
   setCopyrightYear();
   setLastUpdated();
 });

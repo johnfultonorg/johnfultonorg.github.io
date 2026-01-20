@@ -2,7 +2,7 @@
 
 help:
 	@echo "Available commands:"
-	@echo "  make build        - Build site from src/ to root"
+	@echo "  make build        - Sync assets and includes from src/"
 	@echo "  make check-links  - Check all external links"
 	@echo "  make push         - Build, check links, and push to git"
 	@echo "  make clean        - Clean temp files"

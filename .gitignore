@@ -2,7 +2,7 @@
 node_modules
 /dist
 
-# Build artifacts (keep HTML - needed for GitHub Pages)
+# Build artifacts
 .cache
 *.tmp
 *.data

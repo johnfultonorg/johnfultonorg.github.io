@@ -91,8 +91,8 @@ button { line-height:1em; }
  Headings Default Styles
 ************************************************/
 h1, h2, h3, h4, h5, h6 { line-height:1.2; font-weight:normal; font-style: normal; font-variant: normal; text-rendering: optimizeLegibility;}
-h1, h2, h3 { color:rgb(120,130,140); }
-h4, h5, h6 { color:rgb(90,100,105); }
+h1, h2, h3 { color: var(--text-primary, #e0e0e0); }
+h4, h5, h6 { color: var(--text-primary, #d0d0d0); }
 h1 { font-size:2.8125em; }
 h2 { font-size:2.5em; }
 h3 { font-size:2.1875em; }
@@ -103,7 +103,7 @@ h6 { font-size:1.25em; }
 /************************************************
  Paragragh Default Styles
 ************************************************/
-p { color:rgb(30,30,30); padding:0 0 5px 0; font-size:0.875em; }
+p { color: var(--text-primary, #e0e0e0); padding:0 0 5px 0; font-size:0.875em; }
 
 /************************************************
  Link Default Styles
@@ -136,7 +136,7 @@ blockquote { padding:7px 2% 0 2%; font-size:0.875em; }
  Table Default Styles
 ************************************************/
 .table-container { width:100%; overflow-x: auto; margin: 7px 0;}
-.table-container table { display:inline-table; border-collapse: separate; color:rgb(30,30,30); font-size:0.875em; text-align:left; line-height:1.4; vertical-align: top; }
+.table-container table { display:inline-table; border-collapse: separate; color: var(--text-primary, #e0e0e0); font-size:0.875em; text-align:left; line-height:1.4; vertical-align: top; }
 
 /************************************************
  Images Default Styles
@@ -172,23 +172,23 @@ address > a { font-size:0.875em; display: block;}
  Rule Default Styles
 ************************************************/
 .rule { padding:5px 0; width:100%; margin:7px 0;}
-.rule hr { margin: 0; border: none; border-top: 1px solid rgb(221, 221, 221); width: 100%; }
+.rule hr { margin: 0; border: none; border-top: 1px solid var(--border-color, rgb(221, 221, 221)); width: 100%; }
 
 /************************************************
  PLaceholder Small Hero Default Styles
 ************************************************/
 .placeholder { background-color:lightgrey; text-align:center; padding:10px 0; margin:7px 0; width: 100%;}
 h3.smallhero-header, p.smallhero-tagline { margin: 0px; }
-h3.smallhero-header { font-size:1.25em; color: rgb(70,70,70); }
-h3.smallhero-tagline { color: rgb(100,100,100); font-style:normal; padding:0;}
+h3.smallhero-header { font-size:1.25em; color: var(--text-primary, rgb(70,70,70)); }
+h3.smallhero-tagline { color: var(--text-primary, rgb(100,100,100)); font-style:normal; padding:0;}
 
 /************************************************
  PLaceholder Hero Unit Default Styles
 ************************************************/
 .placeholder-hero { background-color:lightgrey; text-align:left; padding:10px 0 10px 20px; margin:7px 0; width: 100%;}
 h1.hero-header, p.hero-tagline { margin: 0px; }
-h1.hero-header { color: rgb(70,70,70); }
-p.hero-tagline { color: rgb(100,100,100); font-style:normal; padding:0;}
+h1.hero-header { color: var(--text-primary, rgb(70,70,70)); }
+p.hero-tagline { color: var(--text-primary, rgb(100,100,100)); font-style:normal; padding:0;}
 
 /************************************************
  Social Default Styles

@@ -360,18 +360,18 @@ img{
 .footer-version {
   margin: 0;
   font-weight: bold;
-  color: #fff;
+  color: #1a1a1a;
 }
 
 .footer-copyright {
   margin: 10px 0;
-  color: #fff;
+  color: #1a1a1a;
   font-size: 12px;
 }
 
 .footer-updated {
   margin: 5px 0 0 0;
-  color: #fff;
+  color: #1a1a1a;
   font-size: 11px;
   opacity: 0.9;
 }

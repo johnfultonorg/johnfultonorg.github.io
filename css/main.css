@@ -624,3 +624,26 @@ img:not(.profile-icon){
 address {
   font-style: normal;
 }
+
+.map-container {
+  margin-top: 1em;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.map-link {
+  color: var(--link-color);
+  text-decoration: none;
+  padding: 0.5em 0.75em;
+  display: inline-block;
+  border-radius: 4px;
+  transition: background-color var(--transition-speed) ease;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.map-link:hover {
+  color: var(--link-hover);
+  background-color: #e0e0e0;
+}

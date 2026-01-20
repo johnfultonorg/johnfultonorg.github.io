@@ -392,18 +392,19 @@ img:not(.profile-icon){
 }
 
 .tab-nav .active-tab {
-    border-bottom: 2px solid #555; /* A thicker line to indicate selection */
+    border-bottom: 3px solid var(--link-color);
+    background-color: rgba(31, 123, 182, 0.08);
 }
 
 .tab-nav .active-tab a {
-    color: #000; /* Darker text color */
-    font-weight: bold; /* Bolder text to draw attention */
-    background-color: #f0f0f0; /* A light gray background color */
+    color: var(--link-color);
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 24px;
     background-color: var(--button-bg);
     color: white;
     text-align: center;
@@ -411,15 +412,19 @@ img:not(.profile-icon){
     border-radius: 5px;
     font-weight: bold;
     margin-top: 20px;
-    border: none;
+    border: 2px solid var(--button-bg);
     cursor: pointer;
-    
-    /* Hover effect */
-    transition: background-color var(--transition-speed) ease;
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 
 .button:hover {
     background-color: var(--button-hover);
+    border-color: var(--button-hover);
+}
+
+.button:focus {
+    outline: 3px solid var(--link-color);
+    outline-offset: 2px;
 }
 
 .skip {

@@ -9,6 +9,12 @@ async function includeHtml(selector, file) {
     host.innerHTML = await res.text();
   } catch (err) {
     console.error("Include failed:", err);
+    // Show user-friendly fallback message
+    if (selector === "#nav-placeholder") {
+      host.innerHTML = '<p style="text-align: center; color: #999; padding: 10px;">Navigation unavailable</p>';
+    } else if (selector === "#footer-placeholder") {
+      host.innerHTML = '<p style="text-align: center; color: #999; padding: 10px;">Footer unavailable</p>';
+    }
   }
 }
 
@@ -38,14 +44,18 @@ function setLastUpdated() {
 document.addEventListener("DOMContentLoaded", async () => {
   const activePage = document.body.dataset.activePage; // e.g., "contact", "courses", ...
 
-  // Detect if we're on a deep page (src/pages/) or root
-  const isDeepPage = window.location.pathname.includes('src/pages');
-  const basePath = isDeepPage ? '../../' : './';
+  try {
+    // Detect if we're on a deep page (src/pages/) or root
+    const isDeepPage = window.location.pathname.includes('src/pages');
+    const basePath = isDeepPage ? '../../' : './';
 
-  await includeHtml("#nav-placeholder", basePath + "nav.html");
-  setActiveNav(activePage);
+    await includeHtml("#nav-placeholder", basePath + "nav.html");
+    setActiveNav(activePage);
 
-  await includeHtml("#footer-placeholder", basePath + "footer.html");
-  setCopyrightYear();
-  setLastUpdated();
+    await includeHtml("#footer-placeholder", basePath + "footer.html");
+    setCopyrightYear();
+    setLastUpdated();
+  } catch (err) {
+    console.error("Layout initialization error:", err);
+  }
 });

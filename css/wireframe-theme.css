@@ -51,17 +51,6 @@ label.label { margin:7px 0px 0px 0px;}
 ************************************************/
 table { max-width: 100%; border-collapse: collapse; border-spacing: 0; }
 
-.table { width: 100%; }
-.table thead.head { background: whitesmoke; }
-.table thead tr { border-bottom: 1px solid #ddd; }
-.table thead tr th { border-bottom: 1px solid #ccc; }
-.table tbody tr.even { background: #f7f7f7; }
-.table tbody tr.odd { background: white; }
-.table tbody tr:hover { background: #f2f2f2; }
-.table tbody tr td { border-bottom: 1px solid #ccc; }
-
-thead tr td, thead tr th, tbody tr td, tbody tr th, tfoot tr td, tfoot tr th { padding: 0.625em; }
-
 /************************************************
  Images
 ************************************************/
@@ -194,7 +183,6 @@ p.hero-tagline { color: var(--text-primary, rgb(100,100,100)); font-style:normal
  Social Default Styles
 ************************************************/
 .social-media { display:block;   margin-top: 10px; }
-.social-media * { font-family:'coffeecup-font-icons' !important; color:#444; background-color: transparent;}
 .social-media li { display: inline; padding: 2px; }
 
 /************************************************
@@ -229,9 +217,3 @@ select { font-size: 0.875em; }
  Html Element
 ************************************************/
 .html-element{ min-height: 50px; min-width: 10px; }
-
-/************************************************
-  Font Icon element Styles
-************************************************/
-span.glyph, a.glyph {font-size: 40px; display: block; color: black; text-decoration:none; margin: 0;}
-span.glyph i, a.glyph i { line-height: 1; }

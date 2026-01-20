@@ -1,9 +1,3 @@
-function fixNavLinks() {
-  // Navigation links are already correct as-is
-  // Files are at root level, not in subdirectories
-  // No fixing needed
-}
-
 // js/layout.js
 async function includeHtml(selector, file) {
   const host = document.querySelector(selector);
@@ -13,7 +7,6 @@ async function includeHtml(selector, file) {
     const res = await fetch(file);
     if (!res.ok) throw new Error(`${file} -> ${res.status}`);
     host.innerHTML = await res.text();
-    fixNavLinks(); // Fix links after nav is loaded
   } catch (err) {
     console.error("Include failed:", err);
   }

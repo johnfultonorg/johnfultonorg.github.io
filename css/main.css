@@ -13,6 +13,7 @@
   --border-color: #a0a0a0;
   --button-bg: #007bff;
   --button-hover: #0056b3;
+  --transition-speed: 0.3s;
 }
 
 /* Global */

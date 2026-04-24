@@ -787,3 +787,39 @@ address {
   color: var(--link-hover);
   background-color: #e0e0e0;
 }
+/* Course page refinements */
+.course-intro {
+  margin-bottom: 1em;
+}
+
+.course-current {
+  color: var(--text-secondary);
+  font-weight: 700;
+  margin: 0 0 1.5em 0;
+}
+
+.course-entry {
+  margin: 0 0 1.75em 0;
+  padding-bottom: 1.25em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.course-entry:last-of-type {
+  border-bottom: none;
+}
+
+.course-entry h3.heading-1 {
+  margin-top: 0;
+}
+
+.course-terms,
+.course-title,
+.course-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 0.7em 0;
+}
+
+.course-title {
+  color: var(--text-primary);
+}

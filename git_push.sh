@@ -30,18 +30,28 @@ fi
 # Git operations
 # -----------------------------------------------
 
+version=$(grep -o 'Version [0-9][0-9.]*' footer.html | head -n 1 | sed 's/^Version //')
+
+if [[ -z "$version" ]]; then
+    echo "Error: Could not determine version from footer.html"
+    exit 1
+fi
+
 has_changes="false"
 if [[ -n "$(git status --porcelain)" ]]; then
     has_changes="true"
 fi
 
 if [[ "$has_changes" == "true" ]]; then
-    read -p "Enter commit message: " message
+    read -p "Enter commit message text for version $version: " message
 
     if [[ -z "$message" ]]; then
         echo "Error: Commit message cannot be empty when there are local changes."
         exit 1
     fi
+
+    full_message="$version $message"
+    echo "Final commit message: $full_message"
 
     echo "Adding changes..."
     git add -A
@@ -49,7 +59,7 @@ if [[ "$has_changes" == "true" ]]; then
     # Check again after add in case all detected files were ignored or unchanged.
     if [[ -n "$(git status --porcelain)" ]]; then
         echo "Committing..."
-        git commit -m "$message"
+        git commit -m "$full_message"
     else
         echo "No committable changes after add; continuing with pull/push."
     fi

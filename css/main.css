@@ -517,6 +517,44 @@ img:not(.profile-icon){
   opacity: 0.9;
 }
 
+/* Word cloud page */
+.wordcloud-panel {
+  border: 1px solid #d5dce4;
+  border-radius: 14px;
+  padding: 18px;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(31, 123, 182, 0.12) 0%, transparent 35%),
+    radial-gradient(circle at 90% 80%, rgba(255, 180, 23, 0.16) 0%, transparent 45%),
+    linear-gradient(160deg, #ffffff 0%, #f3f7fb 100%);
+  box-shadow: 0 10px 22px rgba(15, 45, 75, 0.08);
+}
+
+.wordcloud-status {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  color: #455;
+}
+
+.wordcloud-canvas {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.wordcloud-stage {
+  width: 100%;
+  height: 500px;
+  display: block;
+  border-radius: 10px;
+}
+
+@media (max-width: 700px) {
+  .wordcloud-stage {
+    height: 360px;
+  }
+}
+
 /* Hero Section Animations */
 @keyframes fadeInDown {
   from {
@@ -615,6 +653,16 @@ img:not(.profile-icon){
 
   .row > [class*='coffee-span-'] > .container.button-container {
     margin-bottom: 0;
+  }
+
+  .tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tab-nav li {
+    float: none;
   }
 }
 

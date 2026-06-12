@@ -88,18 +88,24 @@
       return [];
     }
 
+    const wordCount = normalized.length;
+    const minFont = wordCount > 30 ? 12 : wordCount > 20 ? 13 : 15;
+    const maxFont = wordCount > 30 ? 34 : wordCount > 20 ? 40 : 50;
+
     const maxWeight = normalized.reduce((max, item) => Math.max(max, item.weight), 1);
     const minWeight = normalized.reduce((min, item) => Math.min(min, item.weight), maxWeight);
 
     if (maxWeight === minWeight) {
       // If all weights are the same (common with one-column sheets), keep sizes moderate
       // so more terms can fit and remain visible.
-      const pattern = [34, 30, 27, 24, 22, 20];
+      const pattern = [maxFont, maxFont - 4, maxFont - 7, maxFont - 10, maxFont - 13, maxFont - 16];
       return normalized.map((item, index) => [item.text, pattern[index % pattern.length]]);
     }
 
     return normalized.map((item) => {
-      const scaled = Math.round(14 + (item.weight / maxWeight) * 72);
+      const spread = maxFont - minFont;
+      const normalizedWeight = (item.weight - minWeight) / (maxWeight - minWeight);
+      const scaled = Math.round(minFont + normalizedWeight * spread);
       return [item.text, scaled];
     });
   }
@@ -109,9 +115,14 @@
   }
 
   function getCloudSize(container) {
-    const width = Math.max(320, Math.floor(container.clientWidth));
-    const height = window.innerWidth < 700 ? 360 : 500;
-    return { width, height };
+    const safePadding = window.innerWidth < 700 ? 12 : 16;
+    const width = Math.max(320, Math.floor(container.clientWidth - safePadding * 2));
+    const minimumHeight = window.innerWidth < 700 ? 540 : 860;
+    const containerHeight = Math.floor(container.clientHeight - safePadding * 2);
+    const aspectHeight = Math.floor(width * 0.62);
+    const viewportHeight = Math.floor(window.innerHeight * 0.82);
+    const height = Math.max(minimumHeight, aspectHeight, viewportHeight);
+    return { width, height: Math.max(height, containerHeight) };
   }
 
   async function fetchWordsFromSheet(sheetId, gid) {
@@ -151,27 +162,30 @@
     const dimensions = getCloudSize(container);
     canvas.width = dimensions.width;
     canvas.height = dimensions.height;
+    canvas.style.height = dimensions.height + "px";
 
     WordCloud(canvas, {
       list: scaleWordsForLibrary(words),
-      gridSize: Math.max(8, Math.round(dimensions.width / 70)),
-      weightFactor: 1,
+      gridSize: Math.max(6, Math.round(dimensions.width / 95)),
+      weightFactor: 1.1,
       fontFamily: "Georgia, Times New Roman, serif",
       color: chooseColor,
-      rotateRatio: 0.35,
+      rotateRatio: 0.2,
       minRotation: -Math.PI / 3,
       maxRotation: Math.PI / 3,
+      // Keep the cloud anchored high in the canvas so it starts near the top.
+      origin: [Math.floor(dimensions.width / 2), Math.floor(dimensions.height * 0.26)],
       backgroundColor: "rgba(0,0,0,0)",
       shuffle: true,
-      drawOutOfBound: false
+      drawOutOfBound: false,
+      shrinkToFit: true
     });
   }
 
   async function initializeWordCloud() {
     const cloudRoot = document.getElementById("word-cloud");
     const cloudCanvas = document.getElementById("word-cloud-canvas");
-    const statusEl = document.getElementById("wordcloud-status");
-    if (!cloudRoot || !cloudCanvas || !statusEl) {
+    if (!cloudRoot || !cloudCanvas) {
       return;
     }
 
@@ -181,7 +195,11 @@
     const refreshIntervalMs = 5 * 60 * 1000;
 
     function setStatus(message) {
-      statusEl.textContent = message;
+      if (!message) {
+        cloudRoot.removeAttribute("data-status");
+        return;
+      }
+      cloudRoot.setAttribute("data-status", message);
     }
 
     function renderCurrentWords() {
@@ -196,8 +214,7 @@
           setStatus("No sheet data found, using sample words.");
         } else {
           activeWords = words;
-          const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-          setStatus("Updated " + time);
+          setStatus("");
         }
       } catch (error) {
         console.error(error);
@@ -209,7 +226,7 @@
     }
 
     if (!sheetId) {
-      statusEl.textContent = "Showing sample words.";
+      setStatus("Showing sample words.");
       activeWords = SAMPLE_WORDS;
       renderCurrentWords();
       return;
@@ -217,6 +234,17 @@
 
     setStatus("Loading...");
     await refreshFromSheet();
+
+    if (typeof ResizeObserver === "function") {
+      const observer = new ResizeObserver(function () {
+        renderCurrentWords();
+      });
+      observer.observe(cloudRoot);
+    }
+
+    window.addEventListener("load", function () {
+      renderCurrentWords();
+    });
 
     setInterval(function () {
       refreshFromSheet();

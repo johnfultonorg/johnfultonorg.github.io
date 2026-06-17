@@ -29,19 +29,9 @@
       .filter((item) => item.text.length > 0 && item.weight > 0);
   }
 
-  function hashText(value) {
-    let hash = 0;
-    for (let i = 0; i < value.length; i += 1) {
-      hash = (hash << 5) - hash + value.charCodeAt(i);
-      hash |= 0;
-    }
-    return Math.abs(hash);
-  }
-
-  function generatedWeightFromText(text) {
-    const hash = hashText(text.toLowerCase());
-    // Stable pseudo-random weight in the range 3..10.
-    return 3 + (hash % 8);
+  function generateRandomWeight() {
+    // Random fallback weight in the range 3..10 when no numeric weight is provided.
+    return 3 + Math.floor(Math.random() * 8);
   }
 
   function rowsToWords(rows) {
@@ -52,7 +42,7 @@
         const rawWeight = cells[1] && cells[1].v ? Number(cells[1].v) : NaN;
         return {
           text: text,
-          weight: Number.isFinite(rawWeight) && rawWeight > 0 ? rawWeight : generatedWeightFromText(text)
+          weight: Number.isFinite(rawWeight) && rawWeight > 0 ? rawWeight : generateRandomWeight()
         };
       })
       .filter((word) => word.text.trim().length > 0);
@@ -76,7 +66,7 @@
         const parsed = Number((pieces[1] || "").replace(/^"|"$/g, "").trim());
         return {
           text: text,
-          weight: Number.isFinite(parsed) && parsed > 0 ? parsed : generatedWeightFromText(text)
+          weight: Number.isFinite(parsed) && parsed > 0 ? parsed : generateRandomWeight()
         };
       })
       .filter((item) => item.text.length > 0);

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Interactive word cloud for John Fulton. Data can be maintained in a public-read Google Sheet and rendered automatically on this page."
+    />
+    <meta
+      name="keywords"
+      content="John Fulton word cloud, Google Sheets word cloud, cybersecurity topics, teaching topics"
+    />
+    <title>Word Cloud | John Fulton</title>
+    <meta property="og:title" content="Word Cloud | John Fulton" />
+    <meta property="og:description" content="Explore a dynamically maintained word cloud powered by a Google Sheet." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://johnfulton.org/wordcloud.html" />
+    <meta property="og:image" content="https://johnfulton.org/John.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Word Cloud | John Fulton" />
+    <meta name="twitter:description" content="A word cloud maintained via Google Sheets and displayed on johnfulton.org." />
+    <meta name="author" content="John Fulton" />
+    <link rel="canonical" href="https://johnfulton.org/wordcloud.html" />
+    <link rel="stylesheet" href="css/coffeegrinder.css" />
+    <link rel="stylesheet" href="css/wireframe-theme.css" />
+    <script defer src="https://umami-production-8636.up.railway.app/script.js" data-website-id="2925af5c-1d46-465a-aa18-c89801748065"></script>
+    <script>
+      document.createElement("picture");
+    </script>
+    <script src="js/picturefill.min.js" class="picturefill" async="async"></script>
+    <link rel="stylesheet" href="css/main.css?v=20260612h" />
+    <link rel="icon" type="image/x-icon" href="jf.png" />
+    <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.3/src/wordcloud2.min.js" defer></script>
+  </head>
+
+  <body data-active-page="wordcloud">
+    <div class="row full-width-row header">
+      <header class="coffee-span-12">
+        <a href="#main-content" class="skip">Skip to main content</a>
+        <div class="container header-container">
+          <a href="index.html">
+            <h1 class="page-heading">John Fulton</h1>
+          </a>
+          <p class="paragraph tagline">
+            Lecturer and Student Coordinator, Computing Sciences, Franklin
+            University
+          </p>
+          <div id="nav-placeholder"></div>
+        </div>
+      </header>
+    </div>
+
+    <main id="main-content" class="row">
+      <div class="coffee-span-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><span>Word Cloud</span></li>
+          </ol>
+        </nav>
+      </div>
+
+      <article class="coffee-span-12">
+        <div id="word-cloud" class="wordcloud-canvas" data-sheet-id="1igQHwNbo2-l9yxSjP_Px7z_pjhm7RKcmbP4gfR5wYaw" data-sheet-gid="0" aria-live="polite" aria-label="Word cloud terms">
+          <canvas id="word-cloud-canvas" class="wordcloud-stage" role="img" aria-label="Word cloud visualization"></canvas>
+        </div>
+      </article>
+
+      <div id="footer-placeholder"></div>
+    </main>
+
+    <div class="row full-width-row footer">
+      <div class="coffee-span-12"></div>
+    </div>
+
+    <script src="js/layout.js"></script>
+    <script src="js/wordcloud.js?v=20260612g"></script>
+  </body>
+</html>

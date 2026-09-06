@@ -30,24 +30,61 @@ fi
 # Git operations
 # -----------------------------------------------
 
-read -p "Enter commit message: " message
+version=$(grep -o 'Version [0-9][0-9.]*' footer.html | head -n 1 | sed 's/^Version //')
 
-if [[ -z "$message" ]]; then
-    echo "Error: Commit message cannot be empty."
+if [[ -z "$version" ]]; then
+    echo "Error: Could not determine version from footer.html"
     exit 1
 fi
 
-echo "Adding changes..."
-git add -A
+has_changes="false"
+if [[ -n "$(git status --porcelain)" ]]; then
+    has_changes="true"
+fi
 
-echo "Committing..."
-git commit -m "$message"
+if [[ "$has_changes" == "true" ]]; then
+    read -p "Enter commit message text for version $version: " message
+
+    if [[ -z "$message" ]]; then
+        echo "Error: Commit message cannot be empty when there are local changes."
+        exit 1
+    fi
+
+    full_message="$version $message"
+    echo "Final commit message: $full_message"
+
+    echo "Adding changes..."
+    git add -A
+
+    # Check again after add in case all detected files were ignored or unchanged.
+    if [[ -n "$(git status --porcelain)" ]]; then
+        echo "Committing..."
+        git commit -m "$full_message"
+    else
+        echo "No committable changes after add; continuing with pull/push."
+    fi
+else
+    echo "Working tree is clean; skipping commit step."
+fi
 
 echo "Pulling from GitLab..."
 git pull gitlab main
 
 echo "Pulling from GitHub..."
 git pull github main
+
+gitlab_ahead=$(git rev-list --count gitlab/main..HEAD)
+github_ahead=$(git rev-list --count github/main..HEAD)
+
+if [[ "$has_changes" == "false" && "$gitlab_ahead" -eq 0 && "$github_ahead" -eq 0 ]]; then
+    read -p "Working tree is clean and there is nothing to push. Do you really want to proceed with this? (yes/no): " proceed_anyway
+    proceed_anyway=$(echo "$proceed_anyway" | tr '[:upper:]' '[:lower:]')
+
+    if [[ "$proceed_anyway" != "yes" && "$proceed_anyway" != "y" ]]; then
+        echo "Push cancelled by user."
+        exit 0
+    fi
+fi
 
 echo "Pushing to GitLab..."
 git push gitlab main

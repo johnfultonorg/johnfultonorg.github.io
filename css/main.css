@@ -517,6 +517,56 @@ img:not(.profile-icon){
   opacity: 0.9;
 }
 
+.wordcloud-page main.row,
+body[data-active-page="wordcloud"] main.row {
+  max-width: min(96vw, 1800px);
+}
+
+body[data-active-page="wordcloud"] .header-container {
+  padding: 6px 16px 6px !important;
+}
+
+body[data-active-page="wordcloud"] h1.page-heading {
+  display: none;
+}
+
+body[data-active-page="wordcloud"] p.paragraph.tagline {
+  display: none;
+}
+
+body[data-active-page="wordcloud"] .row.full-width-row.header {
+  border-bottom-width: 1px;
+}
+
+.wordcloud-canvas {
+  width: 100%;
+  min-height: 82vh;
+  max-height: 1100px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.wordcloud-stage {
+  width: 100%;
+  min-height: 82vh;
+  max-height: 1100px;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .wordcloud-canvas {
+    min-height: 74vh;
+    max-height: none;
+    padding: 12px;
+  }
+
+  .wordcloud-stage {
+    min-height: 74vh;
+    max-height: none;
+  }
+}
+
 /* Hero Section Animations */
 @keyframes fadeInDown {
   from {
@@ -615,6 +665,16 @@ img:not(.profile-icon){
 
   .row > [class*='coffee-span-'] > .container.button-container {
     margin-bottom: 0;
+  }
+
+  .tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tab-nav li {
+    float: none;
   }
 }
 

@@ -30,12 +30,17 @@ fi
 # Git operations
 # -----------------------------------------------
 
-version=$(grep -o 'Version [0-9][0-9.]*' footer.html | head -n 1 | sed 's/^Version //')
+# Extract version from js/version.js
+version=$(grep -o 'patch: [0-9]*' js/version.js | sed 's/patch: //')
+minor=$(grep -o 'minor: [0-9]*' js/version.js | sed 's/minor: //')
+major=$(grep -o 'major: [0-9]*' js/version.js | sed 's/major: //')
 
-if [[ -z "$version" ]]; then
-    echo "Error: Could not determine version from footer.html"
+if [[ -z "$version" || -z "$minor" || -z "$major" ]]; then
+    echo "Error: Could not determine version from js/version.js"
     exit 1
 fi
+
+version="$major.$minor.$version"
 
 has_changes="false"
 if [[ -n "$(git status --porcelain)" ]]; then

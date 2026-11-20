@@ -382,7 +382,7 @@ img:not(.profile-icon){
   display: block; /* Makes the entire area of the list item clickable */
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 12px 12px;
   text-decoration: none; /* Removes the underline from the links */
 }
 
@@ -669,12 +669,16 @@ body[data-active-page="wordcloud"] .row.full-width-row.header {
 
   .tab-nav {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
   }
 
   .tab-nav li {
     float: none;
+  }
+  
+  .tab-nav li a {
+    padding: 12px 10px;
   }
 }
 
@@ -882,4 +886,94 @@ address {
 
 .course-title {
   color: var(--text-primary);
+}
+
+/* Free AI Tools page styles */
+.ai-category {
+  margin: 2em 0 2.5em 0;
+}
+
+.ai-category h3.heading-2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid var(--link-color);
+}
+
+.ai-tool-entry {
+  margin: 0 0 1.5em 0;
+  padding-bottom: 1.25em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.ai-tool-entry:last-of-type {
+  border-bottom: none;
+}
+
+.ai-tool-entry h4.tool-name {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 0.6em 0;
+}
+
+.tool-description,
+.tool-link,
+.tool-features {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 0.6em 0;
+  font-size: 14px;
+}
+
+.tool-link a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.tool-link a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+.tips-list {
+  margin: 1em 0;
+  padding-left: 1.5em;
+  color: var(--text-secondary);
+}
+
+.tips-list li {
+  margin-bottom: 0.8em;
+  line-height: 1.6;
+}
+
+/* Disclaimer and warning box styles */
+.disclaimer-box {
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 1em;
+  margin: 1.5em 0;
+  border-radius: 4px;
+}
+
+.disclaimer-box h3 {
+  color: #856404;
+  margin-top: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.disclaimer-box p {
+  color: #856404;
+  margin: 0.5em 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.disclaimer-box strong {
+  font-weight: 700;
+  color: #664d03;
 }

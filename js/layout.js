@@ -57,6 +57,13 @@ function setLastUpdated() {
   }
 }
 
+function setSiteVersion() {
+  const versionEl = document.getElementById("site-version");
+  if (versionEl && typeof siteVersion !== 'undefined') {
+    versionEl.textContent = siteVersion.getVersionLabel();
+  }
+}
+
 function changeLanguage(lang) {
   // Store language preference
   localStorage.setItem('preferredLanguage', lang);
@@ -72,6 +79,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const activePage = document.body.dataset.activePage; // e.g., "contact", "courses", ...
 
   try {
+    // Load version information
+    const script = document.createElement('script');
+    script.src = './js/version.js';
+    document.head.appendChild(script);
+
     // Detect if we're on a deep page (src/pages/) or root
     const isDeepPage = window.location.pathname.includes('src/pages');
     const basePath = isDeepPage ? '../../' : './';
@@ -80,6 +92,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     setActiveNav(activePage);
 
     await includeHtml("#footer-placeholder", basePath + "footer.html");
+    // Set version after footer is loaded (small delay to ensure siteVersion is available)
+    setTimeout(setSiteVersion, 100);
     setCopyrightYear();
     setLastUpdated();
   } catch (err) {

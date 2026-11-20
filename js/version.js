@@ -4,7 +4,7 @@
 const siteVersion = {
   major: 4,
   minor: 1,
-  patch: 0,
+  patch: 1,
   
   // Get the full version string (e.g., "4.0.17")
   getVersion: function() {

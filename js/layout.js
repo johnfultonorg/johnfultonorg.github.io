@@ -47,14 +47,27 @@ function setCopyrightYear() {
 
 function setLastUpdated() {
   const lastUpdatedEl = document.getElementById("last-updated");
-  if (lastUpdatedEl) {
-    const today = new Date().toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
-    });
-    lastUpdatedEl.textContent = today;
+  if (!lastUpdatedEl) return;
+
+  if (typeof siteVersion === 'undefined') {
+    console.error("Site version information is unavailable");
+    lastUpdatedEl.textContent = "Unavailable";
+    return;
   }
+
+  const releaseDate = new Date(`${siteVersion.releaseDate}T00:00:00Z`);
+  if (isNaN(releaseDate.getTime()) || releaseDate.toISOString().slice(0, 10) !== siteVersion.releaseDate) {
+    console.error("Invalid site release date:", siteVersion.releaseDate);
+    lastUpdatedEl.textContent = "Unavailable";
+    return;
+  }
+
+  lastUpdatedEl.textContent = releaseDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC'
+  });
 }
 
 function setSiteVersion() {
@@ -79,11 +92,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const activePage = document.body.dataset.activePage; // e.g., "contact", "courses", ...
 
   try {
-    // Load version information
-    const script = document.createElement('script');
-    script.src = './js/version.js';
-    document.head.appendChild(script);
-
     // Detect if we're on a deep page (src/pages/) or root
     const isDeepPage = window.location.pathname.includes('src/pages');
     const basePath = isDeepPage ? '../../' : './';
@@ -92,10 +100,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     setActiveNav(activePage);
 
     await includeHtml("#footer-placeholder", basePath + "footer.html");
-    // Set version after footer is loaded (small delay to ensure siteVersion is available)
-    setTimeout(setSiteVersion, 100);
     setCopyrightYear();
-    setLastUpdated();
+
+    const script = document.createElement('script');
+    script.src = basePath + 'js/version.js';
+    script.onload = () => {
+      setSiteVersion();
+      setLastUpdated();
+    };
+    script.onerror = () => {
+      console.error("Failed to load site version information:", script.src);
+      setLastUpdated();
+    };
+    document.head.appendChild(script);
   } catch (err) {
     console.error("Layout initialization error:", err);
   }
